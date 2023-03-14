@@ -1,19 +1,12 @@
 <!DOCTYPE html>
-<html class="preload" lang="en">
+<html class="preload">
   <head>
-    <!-- Site designed for Drop by the team at 
-    ███╗   ██╗███████╗████████╗██╗     ██╗███████╗██╗   ██╗
-    ████╗  ██║██╔════╝╚══██╔══╝██║     ██║██╔════╝╚██╗ ██╔╝
-    ██╔██╗ ██║█████╗     ██║   ██║     ██║█████╗   ╚████╔╝ 
-    ██║╚██╗██║██╔══╝     ██║   ██║     ██║██╔══╝    ╚██╔╝  
-    ██║ ╚████║███████╗   ██║   ███████╗██║██║        ██║   
-    ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝        ╚═╝    -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no,"> 
 
     <!-- The name of your site that shows up in the browser tab -->
-    <title>Welcome to my site</title>
+    <title>Undangan Pernikanan Digital</title>
 
     <!-- Describe what your site is about -->
     <meta name="description" content="A list of places you can find me on the web.">
@@ -85,15 +78,14 @@
   }
 
   :root:not([data-user-color-scheme]) {
-    --background: var(--color-teal-T1000);
-    --background-alt: var(--color-teal-T900);
+   
     --text-color: var(--color-gray-L200);
     --border-color: var(--color-teal-T800);
     --mode-icon: '🌕';
     --mode-icon-opacity: .85;
 
-     --background-color: #000;
-background-color: rgba(0,0,0,.5);
+     
+background-color: 
     color: #fff;
        background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -104,7 +96,7 @@ background-color: rgba(0,0,0,.5);
   background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlSFyRIvWYtO8kQCi52e9m8Hlx6PzfGnzGjw&usqp=CAU');
    background-repeat: no-repeat;
   background-size: 112% 100%;
-  --background-alt: var(--color-teal-T900);
+  
   --text-color: var(--color-gray-L200);
   --border-color: var(--color-teal-T800);
   --mode-icon: '🌕';
@@ -119,25 +111,24 @@ background-color: rgba(0,0,0,.5);
 }
 
 ::selection {
-  background-color: var(--color-red-R600);
-background-color: rgba(0,0,0,.5);
+  
     color: #fff;
 }
 html {
-  height: 100vh;
+  max-height: 100vh;
   padding: var(--body-border);
-  background-color: blue;(--background-alt);
+ 
   text-align: center;
 }
 
 body {
-  min-height: calc(100vh - var(--body-border)*2);
+  max-height: 100vh;
   margin: 0;
   padding: 2.5vw 2.5vw 5vw;
   display: flex;
   flex-direction: column;
   gap: 1vw;
-  background-color: var(--background);
+  max-height: 600px;
   border-radius: 5px;
   font-size: 112.5%;
   font-family: "Inter UI", Helvetica, Arial, sans-serif;
@@ -167,7 +158,6 @@ body.no-js .toggle-button {
 .toggle-button {
   margin-top: auto;
   padding: .4em .8em;
-  background-color: var(--background-alt);
   border: none;
   border-radius: 5px;
   font-size: clamp(1rem, 1vw, 1.5rem);
@@ -507,10 +497,10 @@ input[type="checkbox"]:disabled {
   <body class="no-js">
     <header>
       <!-- Dark mode toggle -->
-      <div class="mode-toggle">
-        <button class="[ toggle-button ] [ js-mode-toggle ]">
+      <div class="mode-toggle" style="background-color: orange; border-radius: 15px;">
+        <button class="[ toggle-button ] [ js-mode-toggle ]" style="background-color: orange; border-radius: 10px;">
           <span class="toggle-icon" aria-hidden="true"></span>
-          <span class="[ toggle-text ] [ js-mode-toggle-text ]">Ganti Tema</span>
+          <span class="[ toggle-text ] [ js-mode-toggle-text ]" style="background-color: orange;">Ganti Tema</span>
         </button>
       </div>
     </header>
@@ -530,7 +520,7 @@ input[type="checkbox"]:disabled {
         
         <center>
            <form onsubmit="pernikahan(this);" action="undangan_pernikahan.html" class="form-undangan" method="get">
-                <input type="hidden" id="undangan" value="╚═❖•ೋ°𝗨𝗡𝗗𝗔𝗡𝗚𝗔𝗡 °ೋ•❖═╝"
+                <input type="hidden" id="undangan" value="╚═❖•ೋ°𝗨𝗡𝗗𝗔𝗡𝗚𝗔𝗡 °ೋ•❖═╝">
                 <h3 style="margin-top: -5px; margin-bottom: 30px; font-size: 35px;
     -webkit-text-stroke-width: 0.8px;
     -webkit-text-stroke-color: yellow;
